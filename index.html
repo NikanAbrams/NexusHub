@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusHub | Affiliate Manager</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Auth View -->
+    <section id="auth-view">
+        <div class="auth-card glass">
+            <h1>NexusHub</h1>
+            <p>Affiliate Management Portal</p>
+            <div id="login-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="admin@nexushub.com" id="login-email">    
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" id="login-password">        
+                </div>
+                <button class="btn-primary" id="login-btn">Sign In</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- App View -->
+    <section id="app-view" style="display: none;">
+        <div id="main-content-wrapper">
+            <header>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search affiliates..." id="global-search"> 
+                </div>
+                <div class="user-profile">
+                    <span>Niko</span>
+                    <div class="avatar"></div>
+                </div>
+            </header>
+
+            <main>
+                <div class="section-header">
+                    <h2>Affiliates</h2>
+                    <div class="filters">
+                        <select id="status-filter">
+                            <option value="All">All Statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                        <button class="btn-primary" id="open-add-aff-btn" style="width: auto; padding: 8px 20px;">+ Add Affiliate</button>
+                    </div>
+                </div>
+
+                <div class="table-container glass">
+                    <table id="affiliates-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Revenue</th>
+                                <th>Lot Volume</th>
+                                <th>Active Clients</th>
+                            </tr>
+                        </thead>
+                        <tbody id="affiliates-tbody"></tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Add Affiliate Modal -->
+    <div id="add-aff-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 500px;">
+            <span class="close-btn" onclick="closeModals()">&times;</span>
+            <h3>Add New Affiliate</h3>
+            <div style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="new-aff-name" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    <select id="new-aff-country">
+                        <option value="AE">UAE</option>
+                        <option value="GB">UK</option>
+                        <option value="US">USA</option>
+                        <option value="ES">Spain</option>
+                        <option value="JP">Japan</option>
+                        <option value="SG">Singapore</option>
+                        <option value="CY">Cyprus</option>
+                    </select>
+                </div>
+                <button class="btn-primary" id="save-new-aff-btn">Create Affiliate</button>   
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail View Modal -->
+    <div id="detail-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <span class="close-btn" onclick="closeModals()">&times;</span>
+            <div id="detail-header" style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+                <div id="detail-avatar" class="avatar" style="width: 80px; height: 80px; background-size: cover;"></div>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <h2 id="detail-name"></h2>
+                        <div id="detail-country" style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted);"></div>
+                    </div>
+                    <p id="detail-status" class="status-badge" style="display: inline-block; margin-top: 8px;"></p>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="ib-dashboard" onclick="switchTab(this)">IB Dashboard</div>
+                <div class="tab" data-tab="marketing" onclick="switchTab(this)">Marketing</div>
+                <div class="tab" data-tab="connection" onclick="switchTab(this)">Connection Status</div>
+            </div>
+
+            <div class="tab-pane active" id="ib-dashboard">
+                <div style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 30px;" class="glass p-4">
+                    <div class="form-group" style="margin-bottom: 0; flex-grow: 1;">
+                        <label>IB ID (CRM Sync)</label>
+                        <input type="text" id="ib-id-input" placeholder="Enter IB ID">
+                    </div>
+                    <button class="btn-primary" id="sync-crm-btn" style="width: auto; height: 42px;">Sync from CRM</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card glass"><div class="stat-value" id="stat-clients">0</div><div class="stat-label">Clients</div></div>
+                    <div class="stat-card glass"><div class="stat-value" id="stat-volume">0</div><div class="stat-label">Lots</div></div>
+                    <div class="stat-card glass"><div class="stat-value" id="stat-revenue">$0</div><div class="stat-label">Revenue</div></div>
+                </div>
+                <div class="glass" style="padding: 24px;"><h4>Status</h4><p id="performance-text" style="color: var(--text-muted); margin-top: 10px;">Waiting...</p></div>
+            </div>
+
+            <div class="tab-pane" id="marketing">
+                <p id="marketing-insight" style="margin-bottom: 24px; line-height: 1.6;"></p> 
+                <div class="action-bar"><button class="btn-outline" id="open-social-btn">+ Add Social Link</button></div>
+                <div class="table-container">
+                    <table><thead><tr><th>Platform</th><th>Link</th><th>Followers</th><th>Engagement</th></tr></thead>
+                    <tbody id="socials-tbody"></tbody></table>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="connection">
+                <div class="action-bar"><button class="btn-outline" id="open-call-btn">+ Add Call Record</button></div>
+                <div class="table-container">
+                    <table><thead><tr><th>Date</th><th>Caller</th><th>Platform</th><th>Summary</th></tr></thead>
+                    <tbody id="calls-tbody"></tbody></table>
+                </div>
+                <div class="ai-box glass"><h3>✨ AI Suggestions</h3><ul class="ai-list" id="ai-suggestions-list"></ul></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals for Social and Calls -->
+    <div id="social-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 400px;">
+            <span class="close-btn" onclick="closeModals()">&times;</span>
+            <h3>Add Social Link</h3>
+            <div style="margin-top:20px;">
+                <div class="form-group"><label>Platform</label><input type="text" id="soc-p" placeholder="Instagram"></div>
+                <div class="form-group"><label>Link</label><input type="text" id="soc-l" placeholder="link.com/user"></div>
+                <button class="btn-primary" id="save-soc-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="call-modal" class="modal-overlay">
+        <div class="modal-content glass" style="max-width: 400px;">
+            <span class="close-btn" onclick="closeModals()">&times;</span>
+            <h3>Log Call</h3>
+            <div style="margin-top:20px;">
+                <div class="form-group"><label>Platform</label><input type="text" id="call-p" placeholder="Zoom"></div>
+                <div class="form-group"><label>Summary</label><input type="text" id="call-s" placeholder="Notes..."></div>
+                <button class="btn-primary" id="save-call-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const countries = { 'AE':'UAE', 'ES':'Spain', 'SG':'Singapore', 'GB':'UK', 'JP':'Japan', 'US':'USA', 'FR':'France', 'DE':'Germany', 'BR':'Brazil', 'CY':'Cyprus' };
+    
+    let mockData = { affiliates: [] };
+    const names = ["Alex", "Elena", "Marcus", "Sarah", "Yuki", "David", "Sofia", "Liam", "Aarav", "Chloe", "Hiroshi", "Isabella", "Noah", "Emma", "Lucas", "Mia", "Zayed", "Sophie", "Jack", "Lina", "Omar", "Elena", "James", "Ali", "Maria"];
+    const countryKeys = Object.keys(countries);
+
+    names.forEach((name, i) => {
+        mockData.affiliates.push({
+            id: i + 1,
+            name: name + " " + ["Thompson", "Rodriguez", "Chen", "Jenkins", "Tanaka", "Miller", "Rossi", "O'Connor", "Patel", "Lefebvre"][i % 10],
+            country: countryKeys[i % countryKeys.length],
+            status: i % 3 === 0 ? "Pending" : "Active",
+            revenue: Math.floor(Math.random() * 20000),
+            lotVolume: (Math.random() * 300).toFixed(1),
+            activeClients: Math.floor(Math.random() * 100),
+            avatar: "https://i.pravatar.cc/150?u=" + name,
+            insight: "Lead affiliate for their local region.",
+            ibId: 1000 + i,
+            socials: [{p: "Telegram", l: "t.me/user", f: "10K", e: "4%"}],
+            calls: [{d: "2024-04-01", c: "Niko", p: "Zoom", s: "Intro call"}]
+        });
+    });
+
+    const authView = document.getElementById('auth-view');
+    const appView = document.getElementById('app-view');
+    let currentAff = null;
+
+    // --- LOGIN ---
+    document.getElementById('login-btn').onclick = function() {
+        const email = document.getElementById('login-email').value;
+        if (email.includes('@')) {
+            authView.style.display = 'none';
+            appView.style.display = 'grid';
+            renderTable();
+        } else { alert('Enter a valid email.'); }
+    };
+    document.getElementById('login-password').onkeypress = (e) => { if(e.key==='Enter') document.getElementById('login-btn').click(); };
+
+    // --- TABLE ---
+    function renderTable() {
+        const term = document.getElementById('global-search').value.toLowerCase();
+        const filt = document.getElementById('status-filter').value;
+        const body = document.getElementById('affiliates-tbody');
+        body.innerHTML = mockData.affiliates
+            .filter(a => a.name.toLowerCase().includes(term) && (filt === 'All' || a.status === filt))
+            .map(a => `
+                <tr class="clickable" onclick="openDetail(${a.id})">
+                    <td><div style="display:flex;align-items:center;gap:12px;"><img src="${a.avatar}" class="avatar" style="width:32px;height:32px;">${a.name}</div></td>
+                    <td><span class="status-badge status-${a.status.toLowerCase()}">${a.status}</span></td>
+                    <td>$${a.revenue.toLocaleString()}</td>
+                    <td>${a.lotVolume}</td>
+                    <td>${a.activeClients}</td>
+                </tr>
+            `).join('');
+    }
+    document.getElementById('global-search').oninput = renderTable;
+    document.getElementById('status-filter').onchange = renderTable;
+
+    // --- DETAIL ---
+    window.openDetail = function(id) {
+        currentAff = mockData.affiliates.find(a => a.id === id);
+        document.getElementById('detail-name').textContent = currentAff.name;
+        document.getElementById('detail-avatar').style.backgroundImage = "url(" + currentAff.avatar + ")";
+        document.getElementById('detail-country').innerHTML = `<img src="https://flagcdn.com/w20/${currentAff.country.toLowerCase()}.png" style="width:16px;"> ${countries[currentAff.country]}`;
+        const sb = document.getElementById('detail-status');
+        sb.textContent = currentAff.status;
+        sb.className = "status-badge status-" + currentAff.status.toLowerCase();
+        
+        document.getElementById('ib-id-input').value = currentAff.ibId || "";
+        updateStats();
+        renderSocials();
+        renderCalls();
+        document.getElementById('detail-modal').style.display = 'flex';
+    };
+
+    function updateStats() {
+        document.getElementById('stat-clients').textContent = currentAff.activeClients;
+        document.getElementById('stat-volume').textContent = currentAff.lotVolume;
+        document.getElementById('stat-revenue').textContent = "$" + currentAff.revenue.toLocaleString();
+        document.getElementById('performance-text').textContent = currentAff.revenue > 0 ? "Account is healthy." : "Sync required.";
+    }
+
+    window.switchTab = function(el) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById(el.dataset.tab).classList.add('active');
+    };
+
+    // --- ACTIONS ---
+    document.getElementById('sync-crm-btn').onclick = () => {
+        currentAff.status = "Active";
+        currentAff.revenue = Math.floor(Math.random() * 5000) + 1000;
+        currentAff.lotVolume = (Math.random() * 100).toFixed(1);
+        updateStats();
+        renderTable();
+        openDetail(currentAff.id);
+    };
+
+    document.getElementById('open-add-aff-btn').onclick = () => document.getElementById('add-aff-modal').style.display='flex';
+    document.getElementById('save-new-aff-btn').onclick = () => {
+        const n = document.getElementById('new-aff-name').value;
+        if(!n) return alert("Enter name");
+        mockData.affiliates.push({ id: Date.now(), name: n, country: document.getElementById('new-aff-country').value, status: "Pending", revenue: 0, lotVolume: 0, activeClients: 0, avatar: "https://i.pravatar.cc/150", socials: [], calls: [] });
+        renderTable();
+        closeModals();
+    };
+
+    document.getElementById('open-social-btn').onclick = () => document.getElementById('social-modal').style.display='flex';
+    document.getElementById('save-soc-btn').onclick = () => {
+        currentAff.socials.push({ p: document.getElementById('soc-p').value, l: document.getElementById('soc-l').value, f: "5K", e: "2%" });
+        renderSocials();
+        closeModals();
+    };
+
+    document.getElementById('open-call-btn').onclick = () => document.getElementById('call-modal').style.display='flex';
+    document.getElementById('save-call-btn').onclick = () => {
+        currentAff.calls.unshift({ d: new Date().toISOString().split('T')[0], c: "Niko", p: document.getElementById('call-p').value, s: document.getElementById('call-s').value });
+        renderCalls();
+        closeModals();
+    };
+
+    function renderSocials() {
+        document.getElementById('socials-tbody').innerHTML = currentAff.socials.map(s => `<tr><td>${s.p}</td><td>${s.l}</td><td>${s.f}</td><td>${s.e}</td></tr>`).join('');
+    }
+    function renderCalls() {
+        document.getElementById('calls-tbody').innerHTML = currentAff.calls.map(c => `<tr><td>${c.d}</td><td>${c.c}</td><td>${c.p}</td><td>${c.s}</td></tr>`).join('');
+    }
+
+    window.closeModals = () => document.querySelectorAll('.modal-overlay').forEach(m => m.style.display='none');
+    window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) closeModals(); };
+    </script>
+</body>
+</html>
