@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Hub | NexusHub</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h2 onclick="window.location.href='dashboard.html'" style="cursor: pointer;">Nexus<span style="color: var(--primary);">Hub</span></h2>
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Niko</div>
+                <div class="user-role">Senior Affiliate Manager</div>
+            </div>
+            <div class="avatar"></div>
+            <button class="btn-primary" id="logout-btn" style="margin-left: 20px; width: auto; padding: 8px 15px; font-size: 0.8rem;">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="detail-header" class="modal-header glass" style="margin-bottom: 20px; padding: 20px; border-radius: 15px;">
+            <div id="detail-avatar" class="avatar detail-avatar"></div>
+            <div>
+                <div class="modal-header-info">
+                    <h2 id="detail-name" class="modal-title"></h2>
+                    <div id="detail-country-tag" class="country-tag"></div>
+                </div>
+                <p id="detail-growth-status" style="margin-top: 10px;"></p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab" onclick="navigateTo('detail')">IB Dashboard</div>
+            <div class="tab active" onclick="navigateTo('marketing')">Marketing Hub</div>
+            <div class="tab" onclick="navigateTo('history')">Connection History</div>
+        </div>
+
+        <!-- Tab 2: Marketing Dashboard -->
+        <div class="tab-pane active" id="marketing">
+            <div class="glass" style="padding: 30px; margin-bottom: 30px; position: relative;">
+                <div class="loading-overlay" id="marketing-loading"><div class="spinner"></div></div>
+                <div class="marketing-header">
+                    <div>
+                        <h4 style="margin-bottom: 10px;">Marketing Insight</h4>
+                        <p id="det-insight" class="marketing-insight-text"></p>
+                    </div>
+                    <button class="btn-primary" id="sync-marketing-btn" style="width: auto; padding: 10px 25px;">Sync Live Data</button>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Profile Link</th>
+                                <th>Followers</th>
+                                <th>Engagement Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="socials-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+    <script>
+        function navigateTo(tab) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if (tab === 'detail') window.location.href = `affiliate-detail.html?id=${id}`;
+            if (tab === 'marketing') window.location.href = `affiliate-marketing.html?id=${id}`;
+            if (tab === 'history') window.location.href = `affiliate-history.html?id=${id}`;
+        }
+    </script>
+</body>
+</html>

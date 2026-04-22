@@ -46,7 +46,8 @@ const mockData = {
             avatar: "https://i.pravatar.cc/150?u=elena",
             insight: "Focuses on the Spanish market. Strong educational content creator.",
             socials: [
-                { platform: "TikTok", link: "tiktok.com/@elena_trades", followers: "25.2K", engagement: "8.4%" }
+                { platform: "TikTok", link: "tiktok.com/@elena_trades", followers: "25.2K", engagement: "8.4%" },
+                { platform: "Instagram", link: "ig.com/elena_rodriguez", followers: "10K", engagement: "4.5%" }
             ],
             calls: [
                 { id: 3, date: "2024-04-06", caller: "Niko", platform: "WhatsApp", duration: "5m", outcome: "Resolved", summary: "Initial contact, sent brand guidelines." }
@@ -70,7 +71,8 @@ const mockData = {
             avatar: "https://i.pravatar.cc/150?u=marcus",
             insight: "Marcus uses automated bots. Low engagement recently due to market volatility.",
             socials: [
-                { platform: "Twitter", link: "twitter.com/mchentrader", followers: "8.2K", engagement: "2.8%" }
+                { platform: "Twitter", link: "twitter.com/mchentrader", followers: "8.2K", engagement: "2.8%" },
+                { platform: "LinkedIn", link: "linkedin.com/in/mchen", followers: "1.5K", engagement: "0.9%" }
             ],
             calls: [
                 { id: 4, date: "2024-04-01", caller: "Sarah", platform: "Email", duration: "N/A", outcome: "Information", summary: "Inquiry about API documentation." }
@@ -92,9 +94,10 @@ const mockData = {
             avgCommission: 15.0,
             growthTrend: "+25%",
             avatar: "https://i.pravatar.cc/150?u=sarah",
-            insight: "Institutional-level IB with high-net-worth clients.",
+            insight: "Institutional-level IB with high-net-worth clients. UK market leader.",
             socials: [
-                { platform: "LinkedIn", link: "linkedin.com/in/sarahj", followers: "5.1K", engagement: "1.2%" }
+                { platform: "LinkedIn", link: "linkedin.com/in/sarahj", followers: "5.1K", engagement: "1.2%" },
+                { platform: "Facebook", link: "fb.com/sarahjenkinsfx", followers: "102K", engagement: "6.7%" }
             ],
             calls: [
                 { id: 5, date: "2024-04-04", caller: "Niko", platform: "Phone", duration: "18m", outcome: "Positive", summary: "Request for white-label solution." }
@@ -116,11 +119,14 @@ const mockData = {
             avgCommission: 7.0,
             growthTrend: "+8%",
             avatar: "https://i.pravatar.cc/150?u=yuki",
-            insight: "Local educator in Tokyo. Recently started with the platform.",
+            insight: "Local educator in Tokyo. Recently started with the platform. High potential.",
             socials: [
-                { platform: "YouTube", link: "youtube.com/@yukijp", followers: "2.5K", engagement: "12.4%" }
+                { platform: "YouTube", link: "youtube.com/@yukijp", followers: "2.5K", engagement: "12.4%" },
+                { platform: "Twitter", link: "twitter.com/yukifx_jp", followers: "15K", engagement: "9.2%" }
             ],
-            calls: []
+            calls: [
+                { id: 6, date: "2024-04-10", caller: "Sarah", platform: "Zoom", duration: "25m", outcome: "Positive", summary: "KYC verification support." }
+            ]
         },
         {
             id: 106,
@@ -138,9 +144,14 @@ const mockData = {
             avgCommission: 11.5,
             growthTrend: "+12%",
             avatar: "https://i.pravatar.cc/150?u=david",
-            insight: "US-based IB focusing on major forex pairs and indices.",
-            socials: [],
-            calls: []
+            insight: "US-based IB focusing on major forex pairs and indices. Professional trader network.",
+            socials: [
+                { platform: "Twitter", link: "twitter.com/dmiller_trades", followers: "32K", engagement: "4.1%" },
+                { platform: "Instagram", link: "ig.com/davidmiller_fx", followers: "22K", engagement: "5.5%" }
+            ],
+            calls: [
+                { id: 7, date: "2024-04-12", caller: "Niko", platform: "Telegram", duration: "10m", outcome: "Resolved", summary: "Fixed rebate calculation discrepancy." }
+            ]
         },
         {
             id: 107,
@@ -158,9 +169,14 @@ const mockData = {
             avgCommission: 9.8,
             growthTrend: "+4%",
             avatar: "https://i.pravatar.cc/150?u=sofia",
-            insight: "Growing network in Italy. High engagement on social media.",
-            socials: [{ platform: "Instagram", link: "ig.com/sofia_fx", followers: "8.5K", engagement: "5.5%" }],
-            calls: []
+            insight: "Growing network in Italy. High engagement on social media. Focuses on retail education.",
+            socials: [
+                { platform: "Instagram", link: "ig.com/sofia_fx", followers: "8.5K", engagement: "5.5%" },
+                { platform: "TikTok", link: "tiktok.com/@sofia_trades_it", followers: "45K", engagement: "11.2%" }
+            ],
+            calls: [
+                { id: 8, date: "2024-04-15", caller: "Sarah", platform: "WhatsApp", duration: "15m", outcome: "Neutral", summary: "Requested marketing banners in Italian." }
+            ]
         },
         {
             id: 108,
@@ -178,9 +194,13 @@ const mockData = {
             avgCommission: 6.5,
             growthTrend: "+2%",
             avatar: "https://i.pravatar.cc/150?u=liam",
-            insight: "New affiliate, transitioning from retail trader.",
-            socials: [],
-            calls: []
+            insight: "New affiliate, transitioning from retail trader. Strong background in technical analysis.",
+            socials: [
+                { platform: "YouTube", link: "youtube.com/liamtrades", followers: "1.2K", engagement: "8.9%" }
+            ],
+            calls: [
+                { id: 9, date: "2024-04-18", caller: "Niko", platform: "Email", duration: "N/A", outcome: "Information", summary: "Inquiry about partnership tiers." }
+            ]
         },
         {
             id: 109,
@@ -198,9 +218,14 @@ const mockData = {
             avgCommission: 13.2,
             growthTrend: "+18%",
             avatar: "https://i.pravatar.cc/150?u=aarav",
-            insight: "Massive reach in the Indian market. Heavy focus on Gold.",
-            socials: [{ platform: "Telegram", link: "t.me/aarav_signals", followers: "55K", engagement: "7.2%" }],
-            calls: []
+            insight: "Massive reach in the Indian market. Heavy focus on Gold. Large offline trading community.",
+            socials: [
+                { platform: "Telegram", link: "t.me/aarav_signals", followers: "55K", engagement: "7.2%" },
+                { platform: "YouTube", link: "youtube.com/aaravfxindia", followers: "150K", engagement: "4.8%" }
+            ],
+            calls: [
+                { id: 10, date: "2024-04-19", caller: "Niko", platform: "Phone", duration: "30m", outcome: "Positive", summary: "Planning local seminar in Mumbai." }
+            ]
         },
         {
             id: 110,
@@ -218,9 +243,13 @@ const mockData = {
             avgCommission: 8.0,
             growthTrend: "-8%",
             avatar: "https://i.pravatar.cc/150?u=chloe",
-            insight: "Experienced trader but low affiliate activity lately.",
-            socials: [],
-            calls: []
+            insight: "Experienced trader but low affiliate activity lately. Needs reactivation strategy.",
+            socials: [
+                { platform: "Instagram", link: "ig.com/chloe_fx_fr", followers: "12K", engagement: "2.1%" }
+            ],
+            calls: [
+                { id: 11, date: "2024-04-02", caller: "Sarah", platform: "WhatsApp", duration: "8m", outcome: "Follow-up", summary: "Inquired about low activity, promised to check." }
+            ]
         },
         {
             id: 111,
@@ -238,9 +267,13 @@ const mockData = {
             avgCommission: 11.8,
             growthTrend: "+14%",
             avatar: "https://i.pravatar.cc/150?u=hiroshi",
-            insight: "Key partner for the Japanese market expansion.",
-            socials: [],
-            calls: []
+            insight: "Key partner for the Japanese market expansion. Focus on automated trading systems.",
+            socials: [
+                { platform: "Twitter", link: "twitter.com/hiroshi_ea", followers: "28K", engagement: "6.5%" }
+            ],
+            calls: [
+                { id: 12, date: "2024-04-05", caller: "Niko", platform: "Telegram", duration: "20m", outcome: "Positive", summary: "Technical discussion on EA integration." }
+            ]
         },
         {
             id: 112,
@@ -258,9 +291,13 @@ const mockData = {
             avgCommission: 9.5,
             growthTrend: "+3%",
             avatar: "https://i.pravatar.cc/150?u=isabella",
-            insight: "Strong focus on educational webinars.",
-            socials: [],
-            calls: []
+            insight: "Strong focus on educational webinars. Madrid-based network of semi-pro traders.",
+            socials: [
+                { platform: "Facebook", link: "fb.com/isabellafx_academy", followers: "50K", engagement: "3.5%" }
+            ],
+            calls: [
+                { id: 13, date: "2024-04-08", caller: "Sarah", platform: "Zoom", duration: "40m", outcome: "Positive", summary: "Co-hosting webinar session next week." }
+            ]
         },
         {
             id: 113,
@@ -278,9 +315,13 @@ const mockData = {
             avgCommission: 0,
             growthTrend: "0%",
             avatar: "https://i.pravatar.cc/150?u=noah",
-            insight: "Waiting for KYC approval.",
-            socials: [],
-            calls: []
+            insight: "Waiting for KYC approval. Potential US influencer with high reach.",
+            socials: [
+                { platform: "YouTube", link: "youtube.com/noahwilsonfx", followers: "200K", engagement: "5.2%" }
+            ],
+            calls: [
+                { id: 14, date: "2024-04-12", caller: "Niko", platform: "Email", duration: "N/A", outcome: "Information", summary: "Waiting for final bank statement document." }
+            ]
         },
         {
             id: 114,
@@ -298,9 +339,13 @@ const mockData = {
             avgCommission: 12.8,
             growthTrend: "+16%",
             avatar: "https://i.pravatar.cc/150?u=emma",
-            insight: "Excellent retention rate among her sub-IBs.",
-            socials: [],
-            calls: []
+            insight: "Excellent retention rate among her sub-IBs. Focus on long-term portfolio management.",
+            socials: [
+                { platform: "LinkedIn", link: "linkedin.com/in/emmabrownfx", followers: "12K", engagement: "2.4%" }
+            ],
+            calls: [
+                { id: 15, date: "2024-04-14", caller: "Niko", platform: "Phone", duration: "22m", outcome: "Positive", summary: "Discussed sub-IB hierarchy management." }
+            ]
         },
         {
             id: 115,
@@ -318,9 +363,13 @@ const mockData = {
             avgCommission: 10.5,
             growthTrend: "+5%",
             avatar: "https://i.pravatar.cc/150?u=lucas",
-            insight: "Steady growth in the DACH region.",
-            socials: [],
-            calls: []
+            insight: "Steady growth in the DACH region. High-quality leads from financial blog.",
+            socials: [
+                { platform: "Twitter", link: "twitter.com/lmuller_finanz", followers: "8.5K", engagement: "3.1%" }
+            ],
+            calls: [
+                { id: 16, date: "2024-04-16", caller: "Sarah", platform: "Email", duration: "N/A", outcome: "Resolved", summary: "Sent custom tracking links for new campaign." }
+            ]
         },
         {
             id: 116,
@@ -338,9 +387,14 @@ const mockData = {
             avgCommission: 14.5,
             growthTrend: "+22%",
             avatar: "https://i.pravatar.cc/150?u=mia",
-            insight: "Top-tier IB with a large client base in Scandinavia.",
-            socials: [],
-            calls: []
+            insight: "Top-tier IB with a large client base in Scandinavia. Professional asset manager.",
+            socials: [
+                { platform: "Instagram", link: "ig.com/mia_andersen_asset", followers: "25K", engagement: "4.2%" },
+                { platform: "LinkedIn", link: "linkedin.com/in/mia-andersen-invest", followers: "8.2K", engagement: "1.8%" }
+            ],
+            calls: [
+                { id: 17, date: "2024-04-18", caller: "Niko", platform: "Zoom", duration: "50m", outcome: "Positive", summary: "Annual performance review and VIP event invite." }
+            ]
         }
     ]
 };

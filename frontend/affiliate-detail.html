@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB Dashboard | NexusHub</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h2 onclick="window.location.href='dashboard.html'" style="cursor: pointer;">Nexus<span style="color: var(--primary);">Hub</span></h2>
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-name">Niko</div>
+                <div class="user-role">Senior Affiliate Manager</div>
+            </div>
+            <div class="avatar"></div>
+            <button class="btn-primary" id="logout-btn" style="margin-left: 20px; width: auto; padding: 8px 15px; font-size: 0.8rem;">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="detail-header" class="modal-header glass" style="margin-bottom: 20px; padding: 20px; border-radius: 15px;">
+            <div id="detail-avatar" class="avatar detail-avatar"></div>
+            <div>
+                <div class="modal-header-info">
+                    <h2 id="detail-name" class="modal-title"></h2>
+                    <div id="detail-country-tag" class="country-tag"></div>
+                </div>
+                <p id="detail-growth-status" style="margin-top: 10px;"></p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="navigateTo('detail')">IB Dashboard</div>
+            <div class="tab" onclick="navigateTo('marketing')">Marketing Hub</div>
+            <div class="tab" onclick="navigateTo('history')">Connection History</div>
+        </div>
+
+        <!-- Tab 1: IB Dashboard -->
+        <div class="tab-pane active" id="ib-dashboard">
+            <div class="detail-stats-grid">
+                <div class="kpi-card glass">
+                    <div class="kpi-label">Total Deposits</div>
+                    <div class="kpi-value" id="det-deposits">$0</div>
+                </div>
+                <div class="kpi-card glass">
+                    <div class="kpi-label">Active Accounts (MT4/MT5)</div>
+                    <div class="kpi-value" id="det-accounts">0 / 0</div>
+                </div>
+                <div class="kpi-card glass">
+                    <div class="kpi-label">Avg. Commission Rate</div>
+                    <div class="kpi-value" id="det-commission">0%</div>
+                </div>
+            </div>
+            <div class="glass" style="padding: 30px; margin-top: 20px;">
+                <h4 style="margin-bottom: 20px;">Volume Composition</h4>
+                <div class="volume-comp-grid">
+                    <div>
+                        <div class="kpi-label">Gold (XAUUSD)</div>
+                        <div class="kpi-value" id="det-gold-pct" style="color: var(--warning);">0%</div>
+                    </div>
+                    <div>
+                        <div class="kpi-label">Forex Majors</div>
+                        <div class="kpi-value" id="det-forex-pct" style="color: var(--primary);">0%</div>
+                    </div>
+                    <div class="volume-comp-item last">
+                        <div class="kpi-label">Net Growth Trend</div>
+                        <div class="kpi-value" id="det-growth-trend" style="color: var(--success);">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+    <script>
+        function navigateTo(tab) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if (tab === 'detail') window.location.href = `affiliate-detail.html?id=${id}`;
+            if (tab === 'marketing') window.location.href = `affiliate-marketing.html?id=${id}`;
+            if (tab === 'history') window.location.href = `affiliate-history.html?id=${id}`;
+        }
+    </script>
+</body>
+</html>

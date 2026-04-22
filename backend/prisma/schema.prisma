@@ -1,0 +1,42 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  role          String
+  createdAt     DateTime @default(now())
+}
+
+model Affiliate {
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String   @unique
+  country        String
+  status         String
+  growthStatus   String
+  revenue        Float    @default(0)
+  lotVolume      Float    @default(0)
+  activeClients  Int      @default(0)
+  totalDeposits  Float    @default(0)
+  mt4Accounts    Int      @default(0)
+  mt5Accounts    Int      @default(0)
+  avgCommission  Float    @default(0)
+  growthTrend    String
+  avatar         String
+  insight        String
+  socials        Json     @default("[]")
+  calls          Json     @default("[]")
+  volumeAsset    Json     @default("{}")
+  createdAt      DateTime @default(now())
+}
